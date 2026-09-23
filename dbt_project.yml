@@ -1,0 +1,23 @@
+name: 'edutrack'
+version: '1.0.0'
+config-version: 2
+
+profile: 'edutrack'
+
+model-paths: ["models"]
+
+models:
+
+  edutrack:
+
+    staging:
+      +schema: STG
+      +materialized: table
+
+    intermediate:
+      +schema: INT
+      +materialized: table
+
+    marts:
+      +schema: PROD
+      +materialized: table
