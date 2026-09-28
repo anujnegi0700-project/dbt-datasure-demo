@@ -1,13 +1,25 @@
+# version: 2
+
+# sources:
+#   - name: edutrack
+#     database: EDUTRACK_DB
+#     schema: RAW
+
+#     tables:
+#       - name: school
+
+#       - name: scholar
+
+#       - name: attendance
+
+
 version: 2
 
 sources:
   - name: edutrack
-    database: EDUTRACK_DB
-    schema: RAW
-
+    database: DATABASE_QA_DB
+    schema: raw
     tables:
       - name: school
-
       - name: scholar
-
       - name: attendance
