@@ -10,7 +10,10 @@ WITH deduped AS (
         LATE_FLAG,
         LATE_CHECKIN_FLAG,
         CHECK_IN_TIME,
-        ROW_NUMBER() OVER (PARTITION BY ATTENDANCE_ID ORDER BY ATTENDANCE_DATE DESC) as row_num
+        ROW_NUMBER() OVER (
+            PARTITION BY ATTENDANCE_ID 
+            ORDER BY ATTENDANCE_DATE DESC, CHECK_IN_TIME DESC
+        ) as row_num
     FROM {{ ref('int_student_attendance') }}
 )
 
