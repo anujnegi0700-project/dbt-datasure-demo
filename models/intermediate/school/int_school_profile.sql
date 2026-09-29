@@ -37,7 +37,7 @@ SELECT
 
     -- Introduce NULLs in SCHOOL_TYPE
     CASE
-        WHEN SCHOOL_ID IN ('S005', 'S006')
+        WHEN SCHOOL_ID IN ('S003', 'S004')
             THEN NULL
         ELSE SCHOOL_TYPE
     END AS SCHOOL_TYPE,
