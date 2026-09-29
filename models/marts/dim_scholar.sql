@@ -1,3 +1,8 @@
+{{ 
+    config( schema='sacs' ) 
+
+}}
+
 SELECT
     SCHOLAR_ID,
     SCHOLAR_NAME,

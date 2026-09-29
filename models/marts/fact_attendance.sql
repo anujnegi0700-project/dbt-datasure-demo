@@ -1,3 +1,8 @@
+{{ 
+    config( schema='sacs' ) 
+
+}}
+
 WITH deduped AS (
     SELECT
         ATTENDANCE_ID,

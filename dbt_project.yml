@@ -4,20 +4,20 @@ config-version: 2
 
 profile: 'edutrack'
 
-model-paths: ["models"]
+# model-paths: ["models"]
 
-models:
+# models:
 
-  edutrack:
+#   edutrack:
 
-    staging:
-      +schema: STG
-      +materialized: table
+#     staging:
+#       +schema: dbt_demo_stg
+#       +materialized: table
 
-    intermediate:
-      +schema: INT
-      +materialized: table
+#     intermediate:
+#       +schema: dbt_demo_int
+#       +materialized: table
 
-    marts:
-      +schema: PROD
-      +materialized: table
+#     marts:
+#       +schema: dbt_demo_prod
+#       +materialized: table

@@ -1,3 +1,8 @@
+{{ 
+    config( schema='sacs' ) 
+
+}}
+
 SELECT
     SCHOOL_ID,
     SCHOOL_NAME,
