@@ -1,11 +1,7 @@
 SELECT
     SCHOOL_ID,
 
-    CASE
-        WHEN SCHOOL_ID IN ('S003', 'S004')
-            THEN NULL
-        ELSE SCHOOL_NAME
-    END AS SCHOOL_NAME,
+    SCHOOL_NAME,
 
     CITY,
     STATE,
