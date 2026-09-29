@@ -22,6 +22,7 @@ deduped AS (
             ORDER BY ATTENDANCE_DATE DESC, CHECK_IN_TIME DESC
         ) as row_num
     FROM source_data
+
 )
 
 SELECT
