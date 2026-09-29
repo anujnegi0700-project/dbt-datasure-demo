@@ -1,4 +1,9 @@
-WITH deduplicated_attendance AS (
+{{ 
+    config( schema='sacs' ) 
+
+}}
+
+WITH deduped AS (
     SELECT
         ATTENDANCE_ID,
         ATTENDANCE_DATE,
@@ -10,7 +15,10 @@ WITH deduplicated_attendance AS (
         LATE_FLAG,
         LATE_CHECKIN_FLAG,
         CHECK_IN_TIME,
-        ROW_NUMBER() OVER (PARTITION BY ATTENDANCE_ID ORDER BY ATTENDANCE_DATE DESC) as row_num
+        ROW_NUMBER() OVER (
+            PARTITION BY ATTENDANCE_ID 
+            ORDER BY ATTENDANCE_DATE DESC, CHECK_IN_TIME DESC
+        ) as row_num
     FROM {{ ref('int_student_attendance') }}
 )
 
@@ -25,5 +33,5 @@ SELECT
     LATE_FLAG,
     LATE_CHECKIN_FLAG,
     CHECK_IN_TIME
-FROM deduplicated_attendance
+FROM deduped
 WHERE row_num = 1
