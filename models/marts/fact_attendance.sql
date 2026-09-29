@@ -15,6 +15,7 @@ WITH deduped AS (
             ORDER BY ATTENDANCE_DATE DESC, CHECK_IN_TIME DESC
         ) as row_num
     FROM {{ ref('int_student_attendance') }}
+    WHERE ATTENDANCE_ID IS NOT NULL
 )
 
 SELECT
