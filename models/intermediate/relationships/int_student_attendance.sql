@@ -1,10 +1,18 @@
 WITH unique_scholar_school AS (
     SELECT 
-        * 
-    FROM ( 
+        *
+    FROM (
         SELECT 
             *,
             ROW_NUMBER() OVER (PARTITION BY SCHOLAR_ID ORDER BY SCHOOL_ID DESC) as rn
+        FROM {{ ref('int_scholar_school_mapping') }}
+    ) WHERE rn = 1
+)
+
+SELECT 
+    a.ATTENDANCE_ID,
+    a.SCHOLAR_ID,
+    s.SCHOOL_ID,
     a.LATE_CHECKIN_FLAG,
     a.CHECK_IN_TIME
 FROM {{ ref('int_attendance_metrics') }} a
