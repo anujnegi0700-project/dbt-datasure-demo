@@ -1,13 +1,19 @@
 version: 2
 
 sources:
-  - name: edutrack
-    database: EDUTRACK_DB
-    schema: RAW
-
+  - name: raw_demo
+    schema: raw_demo
     tables:
-      - name: school
+      - name: dim_scholar
+      - name: dim_school_year
+      - name: ats_fost_home
+      - name: student_v2_latest
+      - name: advisor
+      - name: learning_codes
+      - name: student_learning_code
+      - name: raw_sy_26_27_re_enroll
 
-      - name: scholar
-
-      - name: attendance
+  - name: prod_dwh_ioesd
+    schema: prod_dwh_ioesd
+    tables:
+      - name: collate_enrollment_and_grade
