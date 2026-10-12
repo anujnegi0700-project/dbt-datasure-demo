@@ -2,7 +2,7 @@ WITH document_digital AS (
     SELECT
         id
         ,created_on
-        ,json_extract_path_text(data, 'specific_data', 'eligible_status', true) AS famsys_frpl_status
+        ,json_extract_path_text(data::json, 'specific_data', 'elig...') AS famsys_frpl_status
         ,CASE
             WHEN famsys_frpl_status = 'free' OR famsys_frpl_status = 'reduced' THEN 1
             ELSE 0

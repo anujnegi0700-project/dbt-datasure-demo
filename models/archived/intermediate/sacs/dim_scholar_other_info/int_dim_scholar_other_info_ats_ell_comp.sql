@@ -7,7 +7,7 @@ WITH ats_ell_comp AS (
             ELSE "last_value"
         END enddate
     FROM  {{ source('raw_demo', 'ats_frpl_comp') }}
-    WHERE ats_ell_code = 'Y'
+    -- WHERE ats_ell_code = 'Y'
 
 ),
 dim_school_year AS (
@@ -20,16 +20,17 @@ dim_school_year AS (
 
 ),
 calculate_max_end_date AS (
-    SELECT 
-        osis_id
-        ,MAX(enddate) AS max_end_date 
-        ,CASE 
-            WHEN max_end_date = '2100-01-01' 
-                THEN NULL
-            ELSE max_end_date
-        END AS ell_last 
-    FROM ats_ell_comp
-    GROUP BY osis_id
+SELECT
+    osis_id,
+    MAX(enddate) AS max_end_date,
+    CASE
+        WHEN MAX(enddate) = '2100-01-01' THEN NULL
+        ELSE MAX(enddate)
+    END AS ell_last
+FROM ats_ell_comp
+GROUP BY osis_id;
+
+
 )
 SELECT DISTINCT
     ats.osis_id AS osis_student_id

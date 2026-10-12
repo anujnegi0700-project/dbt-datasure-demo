@@ -23,6 +23,6 @@ SELECT
     ,sms_enddate
     ,bedsdate
     ,tschoolstartdate
-    ,CONVERT_TIMEZONE( 'UTC', 'America/New_York', getdate()) as lst_updt_ts
+    ,(now() at time zone 'America/New_York') as lst_updt_ts
     ,is_previous
 FROM {{ source('raw_demo', 'dim_school_year') }}

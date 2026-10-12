@@ -40,7 +40,7 @@ fetch_most_recent_start_date AS (
             ON dsab.disability_id=sped.disability_id
             AND dsab.disability_cd='SPR35'
         INNER JOIN dim_school_year AS syr
-            ON syr.esd_schoolyr_id = sped.esd_school_year_id
+            ON cast(syr.esd_schoolyr_id as varchar) = sped.esd_school_year_id
     )
     WHERE rnk = 1
 )
@@ -48,7 +48,7 @@ SELECT DISTINCT
     student_id AS ioe_student_id
     ,dwh_startdate
     ,dwh_enddate
-    ,COALESCE(enddate, getdate()::date) AS max_max_end_date
+    
     ,true AS sped_ever
     ,max_max_end_date between dwh_startdate AND dwh_enddate AS sped_syr
     ,CASE 

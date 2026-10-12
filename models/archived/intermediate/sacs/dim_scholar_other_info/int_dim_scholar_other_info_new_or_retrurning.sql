@@ -52,7 +52,7 @@ dim_reason AS (
     SELECT
         src_reason_id,
         src_reason_description
-    FROM sacs.dim_reason
+    FROM {{ source('raw_demo', 'dim_reason') }}
 ),
  
 final AS (
@@ -84,9 +84,8 @@ final AS (
         ON s.id = a.studentid
     LEFT JOIN latest_exit_reason AS ler
         ON s.id = ler.studentid
-       AND ler.row_num = 1
-    LEFT JOIN dim_reason AS dr
-        ON NULLIF(ler.enrollmentexitreason_id, '')::INT = dr.src_reason_id
+    --    AND ler.row_num = 1
+    -- LEFT JOIN dim_reason AS dr
 )
  
 SELECT 

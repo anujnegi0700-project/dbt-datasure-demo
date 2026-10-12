@@ -103,7 +103,7 @@ latest_exit_reason_fallback AS (
                     school_enrollment_end_date DESC NULLS LAST,
                     school_enrollment_start_date DESC NULLS LAST
                 ) AS rn
-        FROM {{ source('prod_dwh_ioesd', 'collate_enrollment_and_grade') }}
+        FROM {{ source('raw_demo', 'collate_enrollment_and_grade') }}
         WHERE exit_reason_id IS NOT NULL
     )
     WHERE rn = 1
