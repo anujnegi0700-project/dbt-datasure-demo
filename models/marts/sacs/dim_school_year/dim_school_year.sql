@@ -1,6 +1,5 @@
 {{ config(
     materialized='incremental',
-    schema='sacs',
     alias='dim_school_year',
     unique_key=['esd_schoolyr_id','esd_med_name'],
     on_schema_change='fail'

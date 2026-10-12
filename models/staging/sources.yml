@@ -12,6 +12,18 @@ sources:
       - name: learning_codes
       - name: student_learning_code
       - name: raw_sy_26_27_re_enroll
+      - name: resi
+      - name: athenaeum_prod_documents_digital__document_digital
+      - name: athenaeum_prod_documents_digital__document_digital_person
+      - name: program_dsab
+      - name: student_prgm_dsab
+      - name: collate_enrollment_and_grade
+      - name : expected_first_day_after_esd
+      - name: ats_frpl_comp
+      - name: student
+      - name : daily_attendance
+      - name: school_enrollment_grade_reason_exit_details
+      
 
   - name: prod_dwh_ioesd
     schema: prod_dwh_ioesd

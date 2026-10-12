@@ -107,6 +107,7 @@ latest_exit_reason_fallback AS (
         WHERE exit_reason_id IS NOT NULL
     )
     WHERE rn = 1
+    select * from ioesd.
 ),
 learning_codes AS (
     SELECT
