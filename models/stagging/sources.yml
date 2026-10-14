@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: upstream_samples
+    description: >
+      Sample/seed copies of the 14 upstream models, loaded by upstream_samples.sql.
+      Point `schema` at wherever you ran that script.
+    schema: upstream_samples
+    tables:
+      - name: stg_ioesd__advisor
+        columns:
+          - name: student_id
+            tests: [not_null]
+      - name: stg_ioesd__student_v2_latest
+      - name: dim_scholar
+        columns:
+          - name: dwh_scholar_id
+            tests: [not_null, unique]
+      - name: dim_school_year
+        columns:
+          - name: dwh_school_year_id
+            tests: [not_null, unique]
+      - name: int_dim_scholar_other_info_new_or_retrurning
+      - name: stg_raw_sy_26_27_re_enroll
+      - name: int_dim_scholar_other_info_ats_frpl_comp
+      - name: int_dim_scholar_other_info_ats_ell_comp
+      - name: ats_fost_home
+      - name: stg_ats_csv__resi
+      - name: int_dim_scholar_other_info_bell_calendar_enrollment
+      - name: stg_ioesd__learning_codes
+      - name: stg_ioesd__student_learning_code
+      - name: int_dim_scholar_other_info_sped
+      - name: collate_enrollment_and_grade
+      - name: dim_school

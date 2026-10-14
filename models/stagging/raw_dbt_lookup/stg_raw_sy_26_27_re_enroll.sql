@@ -1,0 +1,22 @@
+select
+    {{ adapter.quote('re-enroll_likelihood') }},
+    sa_scholar_id,
+    sf_scholar_id,
+    sf_contact_id,
+    osis_student_id,
+    has_photo,
+    has_attendance,
+    {{ adapter.quote('has 30+ days attendance') }},
+    photoid,
+    photolastmodified,
+    regulated_withdrawl,
+    last_sa_day,
+    exit_reason,
+    first_name,
+    last_name,
+    esd_school_abbreviation,
+    grade,
+    enrollment_status,
+    days_attended,
+    date_entered_district
+from {{ source('upstream_samples', 'stg_raw_sy_26_27_re_enroll') }}
