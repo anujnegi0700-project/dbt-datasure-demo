@@ -18,5 +18,15 @@ SELECT
 
 FROM {{ ref('int_scholar_classification') }} s
 
-LEFT JOIN {{ ref('int_school_profile') }} sc
+LEFT JOIN (
+    SELECT DISTINCT
+        SCHOOL_ID,
+        SCHOOL_NAME,
+        CITY,
+        STATE,
+        REGION,
+        SCHOOL_TYPE,
+        OWNERSHIP_CATEGORY
+    FROM {{ ref('int_school_profile') }}
+) sc
     ON s.SCHOOL_ID = sc.SCHOOL_ID
