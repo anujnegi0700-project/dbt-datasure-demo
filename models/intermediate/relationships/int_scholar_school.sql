@@ -20,3 +20,5 @@ FROM {{ ref('int_scholar_classification') }} s
 
 LEFT JOIN {{ ref('int_school_profile') }} sc
     ON s.SCHOOL_ID = sc.SCHOOL_ID
+
+WHERE s.SCHOLAR_ID IS NOT NULL
