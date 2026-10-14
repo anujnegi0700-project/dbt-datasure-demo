@@ -1,0 +1,21 @@
+select
+    dwh_school_year_id,
+    esd_schoolyr_id,
+    sms_schoolyr_id,
+    esd_long_name,
+    esd_med_name,
+    esd_short_nm,
+    sms_description,
+    esd_is_current,
+    esd_is_next,
+    dwh_startdate,
+    dwh_enddate,
+    esd_startdt,
+    esd_enddt,
+    sms_startdate,
+    sms_enddate,
+    bedsdate,
+    tschoolstartdate,
+    lst_updt_ts,
+    is_previous
+from {{ source('upstream_samples', 'dim_school_year') }}
