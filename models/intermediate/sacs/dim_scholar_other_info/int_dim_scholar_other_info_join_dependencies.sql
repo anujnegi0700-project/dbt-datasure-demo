@@ -319,7 +319,7 @@ LEFT JOIN sped_status AS sped
     ON sped.ioe_student_id=dslr.ioe_student_id
 LEFT JOIN ats_race AS race
     ON dslr.osis_student_id=race.id
-LEFT JOIN advisor AS ad
+LEFT JOIN (SELECT student_id, MAX(advisor_staff_id) as advisor_staff_id FROM advisor GROUP BY 1) AS ad
     ON dslr.ioe_student_id=ad.student_id
 LEFT JOIN learning_codes AS lc
     ON dslr.ioe_student_id = lc.student_id
@@ -331,25 +331,3 @@ LEFT JOIN scholar_reenroll_likelihood AS srl
     ON dslr.ioa_student_id = srl.sa_scholar_id  
 LEFT JOIN lookup_reenroll_likelihood AS lrl
     ON dslr.ioa_student_id = lrl.sa_scholar_id_lookup
-
-
--- select 
--- --FanOut Example
---     *    
--- --Multiple Row Example: looks like the grades from esd dont match the cohort doc.
--- --    distinct  *
--- from
---     sacs.dim_school
--- where
---     -- Standard dim_school restrictions
---     dwh_school_year_id in (67)
---     and
---     active is true
---     and esd_school_name not ilike ('%train%') 
---     and esd_school_name not ilike ('%summer%')
---     and esd_school_name not ilike ('%rtls%')
---     and esd_school_name not ilike ('%test%')
---     -- Test restriction to isolate issue
---     and esd_school_name ilike ('%Ridgewood%')
--- order by
---     esd_school_name
