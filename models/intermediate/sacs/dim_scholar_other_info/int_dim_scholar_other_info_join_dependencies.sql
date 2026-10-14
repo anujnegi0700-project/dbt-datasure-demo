@@ -2,7 +2,13 @@ WITH advisor AS (
     SELECT
         advisor_staff_id
         ,student_id
-    FROM {{ ref('stg_ioesd__advisor') }}
+    FROM (
+        SELECT 
+            advisor_staff_id
+            ,student_id
+            ,ROW_NUMBER() OVER(PARTITION BY student_id ORDER BY advisor_staff_id) as rnk
+        FROM {{ ref('stg_ioesd__advisor') }}
+    ) WHERE rnk = 1
 
 ),
 student_v2_latest AS (
@@ -331,7 +337,6 @@ LEFT JOIN scholar_reenroll_likelihood AS srl
     ON dslr.ioa_student_id = srl.sa_scholar_id  
 LEFT JOIN lookup_reenroll_likelihood AS lrl
     ON dslr.ioa_student_id = lrl.sa_scholar_id_lookup
-
 
 -- select 
 -- --FanOut Example
