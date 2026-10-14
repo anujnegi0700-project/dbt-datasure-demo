@@ -2,7 +2,13 @@ WITH advisor AS (
     SELECT
         advisor_staff_id
         ,student_id
-    FROM {{ ref('stg_ioesd__advisor') }}
+    FROM (
+        SELECT 
+            advisor_staff_id
+            ,student_id
+            ,ROW_NUMBER() OVER(PARTITION BY student_id ORDER BY advisor_staff_id) as rnk
+        FROM {{ ref('stg_ioesd__advisor') }}
+    ) WHERE rnk = 1
 
 ),
 student_v2_latest AS (
@@ -331,25 +337,3 @@ LEFT JOIN scholar_reenroll_likelihood AS srl
     ON dslr.ioa_student_id = srl.sa_scholar_id  
 LEFT JOIN lookup_reenroll_likelihood AS lrl
     ON dslr.ioa_student_id = lrl.sa_scholar_id_lookup
-
-
--- select 
--- --FanOut Example
---     *    
--- --Multiple Row Example: looks like the grades from esd dont match the cohort doc.
--- --    distinct  *
--- from
---     sacs.dim_school
--- where
---     -- Standard dim_school restrictions
---     dwh_school_year_id in (67)
---     and
---     active is true
---     and esd_school_name not ilike ('%train%') 
---     and esd_school_name not ilike ('%summer%')
---     and esd_school_name not ilike ('%rtls%')
---     and esd_school_name not ilike ('%test%')
---     -- Test restriction to isolate issue
---     and esd_school_name ilike ('%Ridgewood%')
--- order by
---     esd_school_name
